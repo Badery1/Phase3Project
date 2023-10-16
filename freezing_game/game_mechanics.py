@@ -74,7 +74,7 @@ def burn_all_logs(player):
             return
 
         player.logs = 0
-        player.temperature += logs_to_burn
+        player.temperature += logs_to_burn * TEMPERATURE_INCREASE_PER_LOG
         session.commit()
         print(f"\nYou burned ALL your logs! Your temperature is now {player.temperature}°F.")
     elif confirmation.lower() == 'n':
