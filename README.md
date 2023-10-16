@@ -27,4 +27,5 @@ Super involved but potentially awesome features (might be way beyond scope of th
 
     -Ascii art for each player environment (inside cabin, outside cabin, adventuring, random events)
     -seperate pop out terminal instead of running in VSCode terminal
+        -maybe light background durning day, dark at night
     -Hunger/finding food by another scavenge for food option
