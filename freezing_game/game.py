@@ -46,8 +46,13 @@ def find_player_by_id():
     player_id = int(input("Enter player ID to find: "))
     player = session.query(Player).filter_by(id=player_id).first()
 
-    if not player or not player.alive:
+    if not player:
         print("\nPlayer not found!")
+        session.close()
+        return
+    
+    elif player.alive == False:
+        print("\nThis player is dead!")
         session.close()
         return
 
@@ -69,6 +74,11 @@ def play_game():
 
     if not player:
         print("\nPlayer not found!")
+        session.close()
+        return
+    
+    elif player.alive == False:
+        print("\nThis player is dead!")
         session.close()
         return
 
@@ -102,6 +112,7 @@ def play_game():
             session.commit()
 
             if not alive:
+                session.commit()
                 print("\nYou fall asleep...")
                 time.sleep(2)  # Delay for 2 seconds
                 print("...only to never wake.")
