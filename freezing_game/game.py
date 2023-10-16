@@ -46,7 +46,7 @@ def find_player_by_id():
     player_id = int(input("Enter player ID to find: "))
     player = session.query(Player).filter_by(id=player_id).first()
 
-    if not player:
+    if not player or not player.alive:
         print("\nPlayer not found!")
         session.close()
         return
@@ -87,15 +87,19 @@ def play_game():
 
         if choice == '1':
             game_mechanics.gather_logs(player)
+            session.commit()
 
         elif choice == '2':
             game_mechanics.burn_logs(player)
+            session.commit()
 
         elif choice == '3':
             game_mechanics.burn_all_logs(player)
+            session.commit()
 
         elif choice == '4':
             alive = game_mechanics.pass_day(player)
+            session.commit()
 
             if not alive:
                 print("\nYou fall asleep...")
