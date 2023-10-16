@@ -4,7 +4,7 @@ from sqlalchemy.exc import SQLAlchemyError
 
 from models import Base
 
-DATABASE_URL = 'sqlite:///game_data.db'
+DATABASE_URL = 'sqlite:///game.db'
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(bind=engine)
 
