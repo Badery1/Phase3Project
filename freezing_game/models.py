@@ -8,7 +8,7 @@ class Player(Base):
     __tablename__ = 'players'
 
     id = Column(Integer, primary_key=True)
-    name = Column(String, unique=True)  # Made name unique for differentiation
+    name = Column(String, unique=True)
     temperature = Column(Float, default=40.0)
     logs = Column(Integer, default=0)
     days_survived = Column(Integer, default=0)

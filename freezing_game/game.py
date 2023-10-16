@@ -11,7 +11,7 @@ def get_int_input(prompt):
             print("Please enter a valid number.")
 
 def create_player():
-    session = get_session()  # Create a new session
+    session = get_session()
     name = input("Enter player name: ")
     new_player = Player(name=name)
     session.add(new_player)
