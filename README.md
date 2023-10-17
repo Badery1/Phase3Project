@@ -4,11 +4,8 @@
 Things to impliment!
     
     -MAKE SURE ALL EXCEPTIONS ARE HANDLED TO AVOID CRASHES
-    -When player dies, make them no longer selectable to play.
     -Add a narrative to day 0 for immersion.
     -Add delays to the burning of logs and result.
-    -Split actions between an inside cabin, and outside cabing (such as burning logs while in cabin, and gathering logs while outside cabin)
-        -Above requires a new action such as leave cabin, and return to cabin (as well as a narrative addition (print message) to give more depth to player actions)
     
 Features that might be more involved, but cool.
     

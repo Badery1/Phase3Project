@@ -12,6 +12,7 @@ class Player(Base):
     temperature = Column(Float, default=40.0)
     logs = Column(Integer, default=0)
     days_survived = Column(Integer, default=0)
+    inside_cabin = Column(Boolean, default=True)
     alive = Column(Boolean, default=True)  # True means alive, False means dead
     gathering_attempts = Column(Integer, default=3)
     logs_gathered = relationship("LogGathered", backref="player")

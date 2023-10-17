@@ -67,6 +67,14 @@ def leaderboard():
         print(f"{player.name} - Days Survived: {player.days_survived}")
     session.close()
 
+def toggle_cabin_location(player):
+    player.inside_cabin = not player.inside_cabin
+    if player.inside_cabin:
+        print("\nYou head back into the warmth the cabin...")
+    else:
+        print("\nYou head out into the bitter cold...")
+    time.sleep(2)
+
 def play_game():
     session = get_session()
     player_id = int(input("\nEnter player ID to play: "))
@@ -76,54 +84,73 @@ def play_game():
         print("\nPlayer not found!")
         session.close()
         return
-    
+
     elif player.alive == False:
         print("\nThis player is dead!")
         session.close()
         return
 
     print(f"\nPlaying as {player.name}.")
-
+    
     while True:
-        print("\n--- Game Menu ---")
-        print("1. Gather firewood")
-        print("2. Burn logs")
-        print("3. Burn All logs")
-        print("4. Pass the day")
-        print("5. Check temperature and logs")
-        print("6. Exit game")
+        if player.inside_cabin:
+            print("\nYou are currently inside the cabin.")
+            print("\n--- Inside Cabin Menu ---")
+            print("1. Burn logs")
+            print("2. Burn All logs")
+            print("3. Pass the day")
+            print("4. Check temperature and logs")
+            print("5. Leave cabin")
+            print("6. Exit game")
+            
+        else:
+            print("\nYou are currently outside the cabin.")
+            print("\n--- Outside Cabin Menu ---")
+            print("1. Gather firewood")
+            print("2. Check temperature and logs")
+            print("3. Enter cabin")
+            print("4. Exit game")
 
         choice = input("Enter your choice: ")
 
-        if choice == '1':
-            game_mechanics.gather_logs(player)
-            session.commit()
-
-        elif choice == '2':
-            game_mechanics.burn_logs(player)
-            session.commit()
-
-        elif choice == '3':
-            game_mechanics.burn_all_logs(player)
-            session.commit()
-
-        elif choice == '4':
-            alive = game_mechanics.pass_day(player)
-            session.commit()
-
-            if not alive:
+        if player.inside_cabin:
+            if choice == '1':
+                game_mechanics.burn_logs(player)
                 session.commit()
-                print("\nYou fall asleep...")
-                time.sleep(2)  # Delay for 2 seconds
-                print("...only to never wake.")
-                print("\nGame over!")
+            elif choice == '2':
+                game_mechanics.burn_all_logs(player)
+                session.commit()
+            elif choice == '3':
+                alive = game_mechanics.pass_day(player)
+                session.commit()
+
+                if not alive:
+                    session.commit()
+                    print("\nYou fall asleep...")
+                    time.sleep(2)
+                    print("...only to never wake.")
+                    print("\nGame over!")
+                    break
+            elif choice == '4':
+                print(f"\nTemperature: {player.temperature}°F, Logs: {player.logs}")
+            elif choice == '5':
+                toggle_cabin_location(player)
+                session.commit()
+            elif choice == '6':
                 break
 
-        elif choice == '5':
-            print(f"\nTemperature: {player.temperature}°F, Logs: {player.logs}")
+        else:  # outside the cabin
+            if choice == '1':
+                game_mechanics.gather_logs(player)
+                session.commit()
+            elif choice == '2':
+                print(f"\nTemperature: {player.temperature}°F, Logs: {player.logs}")
+            elif choice == '3':
+                toggle_cabin_location(player)
+                session.commit()
+            elif choice == '4':
+                break
 
-        elif choice == '6':
-            break
 
 def main():
     while True:
