@@ -1,207 +1,209 @@
+import wx
 import time
 from models import Player
 from database import get_session
 import game_mechanics
 
-def get_int_input(prompt):
-    while True:
-        try:
-            return int(input(prompt))
-        except ValueError:
-            print("Please enter a valid number.")
+class GameApp(wx.App):
+    def OnInit(self):
+        self.frame = GameFrame(None, title="The Freezing Game!", size=(800, 600))
+        self.SetTopWindow(self.frame)
+        self.frame.Show()
+        return True
 
-def create_player():
-    session = get_session()
-    name = input("Enter player name: ")
-    new_player = Player(name=name)
-    session.add(new_player)
-    session.commit()
-    print(f"\nPlayer {name} created!")
-    session.close()
+class GameFrame(wx.Frame):
+    def __init__(self, *args, **kw):
+        super(GameFrame, self).__init__(*args, **kw)
 
-def delete_player():
-    session = get_session()
-    player_id = get_int_input("Enter player ID to delete: ")
-    player = session.query(Player).filter_by(id=player_id).first()
+        self.session = get_session()
 
-    if not player:
-        print("\nPlayer not found!")
-        session.close()
-        return
+        panel = wx.Panel(self)
+        vbox = wx.BoxSizer(wx.VERTICAL)
 
-    session.delete(player)
-    session.commit()
-    print(f"\nPlayer {player.name} deleted!")
-    session.close()
+        self.text_display = wx.TextCtrl(panel, style=wx.TE_MULTILINE | wx.TE_READONLY, size=(400, 300))
+        vbox.Add(self.text_display, 1, flag=wx.EXPAND | wx.ALL, border=5)
 
-def display_all_players():
-    session = get_session()
-    players = session.query(Player).all()
-    for player in players:
-        print(f"ID: {player.id}, Name: {player.name}, Temperature: {player.temperature}°F, Days Survived: {player.days_survived}")
-    session.close()
+        button_panel = wx.Panel(panel)
+        hbox = wx.BoxSizer(wx.HORIZONTAL)
 
-def find_player_by_id():
-    session = get_session()
-    player_id = int(input("Enter player ID to find: "))
-    player = session.query(Player).filter_by(id=player_id).first()
+        create_button = wx.Button(button_panel, label='Create Player', size=(100, 30))
+        delete_button = wx.Button(button_panel, label='Delete Player', size=(100, 30))
+        display_button = wx.Button(button_panel, label='Display Players', size=(100, 30))
+        find_button = wx.Button(button_panel, label='Find Player', size=(100, 30))
+        leaderboard_button = wx.Button(button_panel, label='Leaderboard', size=(100, 30))
+        play_button = wx.Button(button_panel, label='Play Game', size=(100, 30))
 
-    if not player:
-        print("\nPlayer not found!")
-        session.close()
-        return
-    
-    elif player.alive == False:
-        print("\nThis player is dead!")
-        session.close()
-        return
+        create_button.Bind(wx.EVT_BUTTON, self.create_player)
+        delete_button.Bind(wx.EVT_BUTTON, self.delete_player)
+        display_button.Bind(wx.EVT_BUTTON, self.display_all_players)
+        find_button.Bind(wx.EVT_BUTTON, self.find_player_by_id)
+        leaderboard_button.Bind(wx.EVT_BUTTON, self.leaderboard)
+        play_button.Bind(wx.EVT_BUTTON, self.play_game)
 
-    print(f"ID: {player.id}, Name: {player.name}, Temperature: {player.temperature}°F, Days Survived: {player.days_survived}")
-    session.close()
+        hbox.Add(create_button, 0, flag=wx.ALL, border=5)
+        hbox.Add(delete_button, 0, flag=wx.ALL, border=5)
+        hbox.Add(display_button, 0, flag=wx.ALL, border=5)
+        hbox.Add(find_button, 0, flag=wx.ALL, border=5)
+        hbox.Add(leaderboard_button, 0, flag=wx.ALL, border=5)
+        hbox.Add(play_button, 0, flag=wx.ALL, border=5)
 
-def leaderboard():
-    session = get_session()
-    players = session.query(Player).order_by(Player.days_survived.desc()).all()
-    print("\n--- Leaderboard ---")
-    for player in players:
-        print(f"{player.name} - Days Survived: {player.days_survived}")
-    session.close()
+        button_panel.SetSizer(hbox)
+        vbox.Add(button_panel, flag=wx.ALIGN_CENTER)
 
-def toggle_cabin_location(player):
-    player.inside_cabin = not player.inside_cabin
-    if player.inside_cabin:
-        print("\nYou head back into the warmth the cabin...")
-    else:
-        print("\nYou head out into the bitter cold...")
-    time.sleep(2)
+        panel.SetSizer(vbox)
 
-def play_game():
-    session = get_session()
-    player_id = int(input("\nEnter player ID to play: "))
-    player = session.query(Player).filter_by(id=player_id).first()
+        self.input_field = wx.TextCtrl(panel, style=wx.TE_PROCESS_ENTER)
+        self.input_field.Bind(wx.EVT_TEXT_ENTER, self.on_input_enter)
+        vbox.Add(self.input_field, 0, flag=wx.EXPAND | wx.ALL, border=5)
 
-    if not player:
-        print("\nPlayer not found!")
-        session.close()
-        return
+        self.player = None
+        self.init_game()
 
-    elif player.alive == False:
-        print("\nThis player is dead!")
-        session.close()
-        return
+    def init_game(self):
+        self.text_display.AppendText("Welcome to the The Freezing Game!\n")
+        self.text_display.AppendText("Use the provided buttons to Play!\n")
+        self.text_display.AppendText("Have fun!\n")
 
-    if player.days_survived == 0:
-        print("\nThe world as you know it has ended. A violent ice age took the world by storm, and you are left alone stranded at an abandoned campsite.")
+    def create_player(self, event):
+        name_dlg = wx.TextEntryDialog(self, 'Enter player name:', 'Create Player', '')
+        if name_dlg.ShowModal() == wx.ID_OK:
+            name = name_dlg.GetValue()
+            new_player = Player(name=name)
+            self.session.add(new_player)
+            self.session.commit()
+            self.text_display.AppendText(f"\nPlayer {name} created!\n")
+        name_dlg.Destroy()
+
+    def delete_player(self, event):
+        player_id_dlg = wx.TextEntryDialog(self, 'Enter player ID to delete:', 'Delete Player', '')
+        if player_id_dlg.ShowModal() == wx.ID_OK:
+            player_id = int(player_id_dlg.GetValue())
+            player = self.session.query(Player).filter_by(id=player_id).first()
+            if not player:
+                self.text_display.AppendText("\nPlayer not found!\n")
+            else:
+                self.session.delete(player)
+                self.session.commit()
+                self.text_display.AppendText(f"\nPlayer {player.name} deleted!\n")
+        player_id_dlg.Destroy()
+
+    def display_all_players(self, event):
+        players = self.session.query(Player).all()
+        for player in players:
+            self.text_display.AppendText(f"ID: {player.id}, Name: {player.name}, Temperature: {player.temperature}°F, Days Survived: {player.days_survived}\n")
+
+    def find_player_by_id(self, event):
+        player_id_dlg = wx.TextEntryDialog(self, 'Enter player ID to find:', 'Find Player', '')
+        if player_id_dlg.ShowModal() == wx.ID_OK:
+            player_id = int(player_id_dlg.GetValue())
+            player = self.session.query(Player).filter_by(id=player_id).first()
+            if not player:
+                self.text_display.AppendText("\nPlayer not found!\n")
+            elif not player.alive:
+                self.text_display.AppendText("\nThis player is dead!\n")
+            else:
+                self.text_display.AppendText(f"ID: {player.id}, Name: {player.name}, Temperature: {player.temperature}°F, Days Survived: {player.days_survived}\n")
+        player_id_dlg.Destroy()
+
+    def leaderboard(self, event):
+        players = self.session.query(Player).order_by(Player.days_survived.desc()).all()
+        self.text_display.AppendText("\n--- Leaderboard ---\n")
+        for player in players:
+            self.text_display.AppendText(f"{player.name} - Days Survived: {player.days_survived}\n")
+
+    def play_game(self, event):
+        player_id_dlg = wx.TextEntryDialog(self, 'Enter player ID to play:', 'Play Game', '')
+        if player_id_dlg.ShowModal() == wx.ID_OK:
+            player_id = int(player_id_dlg.GetValue())
+            self.player = self.session.query(Player).filter_by(id=player_id).first()
+            if not self.player:
+                self.text_display.AppendText("\nPlayer not found!\n")
+            elif not self.player.alive:
+                self.text_display.AppendText("\nThis player is dead!\n")
+            else:
+                self.play_as_player()
+        player_id_dlg.Destroy()
+
+    def play_as_player(self):
+        self.text_display.AppendText("The world as you know it has ended. A violent ice age took the world by storm, and you are left alone stranded at an abandoned campsite.\n")
         time.sleep(2)
-        print("\nAs the blizzard clears momentarily, you see it - an old, abandoned cabin. With no other shelter in sight, you decide to take refuge. This, is where you will survive.")
+        self.text_display.AppendText("As the blizzard clears momentarily, you see it - an old, abandoned cabin. With no other shelter in sight, you decide to take refuge. This is where you will survive.\n")
         time.sleep(3)
-        print("\nThe door creaks as you enter, the gusting wind dying down behind you. The cabin is cold, almost as cold as the outside. You'll need to find firewood to burn if you're to have any hope of surviving this icy nightmare.")
+        self.text_display.AppendText("The door creaks as you enter, the gusting wind dying down behind you. The cabin is cold, almost as cold as the outside. You'll need to find firewood to burn if you're to have any hope of surviving this icy nightmare.\n")
         time.sleep(3)
-        print("\nHow to survive:")
-        print("- The temperature drops each day.")
-        print("- Gather firewood outside to keep warm.")
-        print("- You have a limited number of attempts to gather wood each day.")
-        print("- Once inside the cabin, burn the wood to increase temperature.")
+        self.text_display.AppendText("How to survive:\n")
+        self.text_display.AppendText("- The temperature drops each day.\n")
+        self.text_display.AppendText("- Gather firewood outside to keep warm.\n")
+        self.text_display.AppendText("- You have a limited number of attempts to gather wood each day.\n")
+        self.text_display.AppendText("- Once inside the cabin, burn the wood to increase temperature.\n")
         time.sleep(3)
-        print("\nWith those thoughts, you prepare yourself for the challenging days ahead.")
+        self.text_display.AppendText("With those thoughts, you prepare yourself for the challenging days ahead.\n")
         time.sleep(2)
+        
+        while True:
+            if self.player.inside_cabin:
+                self.text_display.AppendText("\nYou are currently inside the cabin.\n")
+                self.text_display.AppendText("\n--- Inside Cabin Menu ---\n")
+                self.text_display.AppendText("1. Burn logs\n")
+                self.text_display.AppendText("2. Burn All logs\n")
+                self.text_display.AppendText("3. Pass the day\n")
+                self.text_display.AppendText("4. Check temperature and logs\n")
+                self.text_display.AppendText("5. Leave cabin\n")
+                self.text_display.AppendText("6. Exit game\n")
+            else:
+                self.text_display.AppendText("\nYou are currently outside the cabin.\n")
+                self.text_display.AppendText("\n--- Outside Cabin Menu ---\n")
+                self.text_display.AppendText("1. Gather firewood\n")
+                self.text_display.AppendText("2. Check temperature and logs\n")
+                self.text_display.AppendText("3. Enter cabin\n")
+                self.text_display.AppendText("4. Exit game\n")
 
-    print(f"\nPlaying as {player.name}.")
-    
-    while True:
-        if player.inside_cabin:
-            print("\nYou are currently inside the cabin.")
-            print("\n--- Inside Cabin Menu ---")
-            print("1. Burn logs")
-            print("2. Burn All logs")
-            print("3. Pass the day")
-            print("4. Check temperature and logs")
-            print("5. Leave cabin")
-            print("6. Exit game")
-            
-        else:
-            print("\nYou are currently outside the cabin.")
-            print("\n--- Outside Cabin Menu ---")
-            print("1. Gather firewood")
-            print("2. Check temperature and logs")
-            print("3. Enter cabin")
-            print("4. Exit game")
+            choice_dlg = wx.TextEntryDialog(self, 'Enter your choice:', 'Game Menu', '')
+            if choice_dlg.ShowModal() == wx.ID_OK:
+                choice = choice_dlg.GetValue()
+                if self.player.inside_cabin:
+                    if choice == '1':
+                        game_mechanics.burn_logs(self.player)
+                        self.session.commit()
+                    elif choice == '2':
+                        game_mechanics.burn_all_logs(self.player)
+                        self.session.commit()
+                    elif choice == '3':
+                        alive = game_mechanics.pass_day(self.player)
+                        self.session.commit()
 
-        choice = input("Enter your choice: ")
+                        if not alive:
+                            self.session.commit()
+                            self.text_display.AppendText("\nYou fall asleep...\n")
+                            time.sleep(2)
+                            self.text_display.AppendText("...only to never wake.\n")
+                            self.text_display.AppendText("\nGame over!\n")
+                            break
+                    elif choice == '4':
+                        self.text_display.AppendText(f"\nTemperature: {self.player.temperature}°F, Logs: {self.player.logs}\n")
+                    elif choice == '5':
+                        game_mechanics.toggle_cabin_location(self.player)
+                        self.session.commit()
+                    elif choice == '6':
+                        break
+                else:  # outside the cabin
+                    if choice == '1':
+                        game_mechanics.gather_logs(self.player)
+                        self.session.commit()
+                    elif choice == '2':
+                        self.text_display.AppendText(f"\nTemperature: {self.player.temperature}°F, Logs: {self.player.logs}\n")
+                    elif choice == '3':
+                        game_mechanics.toggle_cabin_location(self.player)
+                        self.session.commit()
+                    elif choice == '4':
+                        break
+            choice_dlg.Destroy()
 
-        if player.inside_cabin:
-            if choice == '1':
-                game_mechanics.burn_logs(player)
-                session.commit()
-            elif choice == '2':
-                game_mechanics.burn_all_logs(player)
-                session.commit()
-            elif choice == '3':
-                alive = game_mechanics.pass_day(player)
-                session.commit()
+    def on_input_enter(self, event):
+        user_input = self.input_field.GetValue()
+        self.text_display.AppendText(f"> {user_input}\n")
+        self.input_field.Clear()
 
-                if not alive:
-                    session.commit()
-                    print("\nYou fall asleep...")
-                    time.sleep(2)
-                    print("...only to never wake.")
-                    print("\nGame over!")
-                    break
-            elif choice == '4':
-                print(f"\nTemperature: {player.temperature}°F, Logs: {player.logs}")
-            elif choice == '5':
-                toggle_cabin_location(player)
-                session.commit()
-            elif choice == '6':
-                break
-
-        else:  # outside the cabin
-            if choice == '1':
-                game_mechanics.gather_logs(player)
-                session.commit()
-            elif choice == '2':
-                print(f"\nTemperature: {player.temperature}°F, Logs: {player.logs}")
-            elif choice == '3':
-                toggle_cabin_location(player)
-                session.commit()
-            elif choice == '4':
-                break
-
-
-def main():
-    while True:
-        print("\n--- Main Menu ---")
-        print("1. Create player")
-        print("2. Delete player")
-        print("3. Display all players")
-        print("4. Find player by ID")
-        print("5. Leaderboard")
-        print("6. Play game")
-        print("7. Exit")
-
-        choice = input("Enter your choice: ")
-
-        if choice == '1':
-            create_player()
-
-        elif choice == '2':
-            delete_player()
-
-        elif choice == '3':
-            display_all_players()
-
-        elif choice == '4':
-            find_player_by_id()
-
-        elif choice == '5':
-            leaderboard()
-
-        elif choice == '6':
-            play_game()
-
-        elif choice == '7':
-            print("\nTill next time!")
-            break
-
-if __name__ == "__main__":
-    main()
+if __name__ == '__main__':
+    app = GameApp(0)
+    app.MainLoop()
