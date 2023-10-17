@@ -4,8 +4,6 @@
 Things to impliment!
     
     -MAKE SURE ALL EXCEPTIONS ARE HANDLED TO AVOID CRASHES
-    -Add a narrative to day 0 for immersion.
-    -Add delays to the burning of logs and result.
     
 Features that might be more involved, but cool.
     
