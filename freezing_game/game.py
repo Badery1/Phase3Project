@@ -90,6 +90,22 @@ def play_game():
         session.close()
         return
 
+    if player.days_survived == 0:
+        print("\nThe world as you know it has ended. A violent ice age took the world by storm, and you are left alone stranded at an abandoned campsite.")
+        time.sleep(2)
+        print("\nAs the blizzard clears momentarily, you see it - an old, abandoned cabin. With no other shelter in sight, you decide to take refuge. This, is where you will survive.")
+        time.sleep(3)
+        print("\nThe door creaks as you enter, the gusting wind dying down behind you. The cabin is cold, almost as cold as the outside. You'll need to find firewood to burn if you're to have any hope of surviving this icy nightmare.")
+        time.sleep(3)
+        print("\nHow to survive:")
+        print("- The temperature drops each day.")
+        print("- Gather firewood outside to keep warm.")
+        print("- You have a limited number of attempts to gather wood each day.")
+        print("- Once inside the cabin, burn the wood to increase temperature.")
+        time.sleep(3)
+        print("\nWith those thoughts, you prepare yourself for the challenging days ahead.")
+        time.sleep(2)
+
     print(f"\nPlaying as {player.name}.")
     
     while True:

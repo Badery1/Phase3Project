@@ -56,6 +56,9 @@ def burn_logs(player):
             player.logs -= logs_to_burn
             player.temperature += logs_to_burn * TEMPERATURE_INCREASE_PER_LOG
             session.commit()
+            
+            print("\nBurning logs...")
+            time.sleep(2)
             print(f"\nYou burned {logs_to_burn} logs. Your temperature is now {player.temperature}°F.")
             break
         except ValueError:
@@ -76,6 +79,9 @@ def burn_all_logs(player):
         player.logs = 0
         player.temperature += logs_to_burn * TEMPERATURE_INCREASE_PER_LOG
         session.commit()
+
+        print("\nBurning all of your logs...")
+        time.sleep(3)
         print(f"\nYou burned ALL your logs! Your temperature is now {player.temperature}°F.")
     elif confirmation.lower() == 'n':
         print("\nFine then. DON'T burn all your logs.")
@@ -90,9 +96,10 @@ def pass_day(player):
     print("\nYou sleep through the night...")
     time.sleep(2)
 
-    temperature_drop = 0.5 * player.days_survived
     player.days_survived += 1
-    player.temperature -= temperature_drop
+    temperature_drop = round(0.5 * (player.days_survived ** 1.2), 2)
+    player.temperature = round(player.temperature - temperature_drop, 2)
+    
     player.gathering_attempts = 3
     session.commit()
 
