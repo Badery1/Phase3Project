@@ -100,7 +100,7 @@ def toggle_cabin_location(player):
                                                                                                                     
 """ + "\x1b[0m")
 
-    time.sleep(2)
+    time.sleep(5)
 
 def play_game():
     session = get_session()
@@ -137,7 +137,7 @@ _  -      -  -     -    -   -   -   -   -   /   \)  -    -   -  -
           | -   -   -   -   -    -  -  -  -    -   |__|__| |
            _______________________________________(___V___)'
                     """ + "\x1b[0m")
-        time.sleep(4)
+        time.sleep(5)
         print("\n\x1b[32m" + r""" As the blizzard clears momentarily, you see it - a cabin. With no other shelter in sight, you decide to take refuge. This, is where you will survive.
                                                 
                                                          /\
@@ -159,7 +159,7 @@ _  -      -  -     -    -   -   -   -   -   /   \)  -    -   -  -
            ^^^^^^^/%%%%%%%%\   _ -   _ -              _-
                   ^^^^^^^^^^
                     """ + "\x1b[0m")
-        time.sleep(4)
+        time.sleep(5)
         print("\n\x1b[33m" + r""" The door creaks as you enter, the gusting wind dying down behind you. The cabin is cold, almost as cold as the outside. You'll need to find firewood to burn if you're to have any hope of surviving this icy nightmare.
      /|                  ______________________________________    
     / |                 |                                      | 
@@ -173,15 +173,48 @@ _  -      -  -     -    -   -   -   -   -   /   \)  -    -   -  -
   | |__||__| |
   |__________|  
                     """ + "\x1b[0m")
-        time.sleep(4)
+        time.sleep(5)
         print("\nHow to survive:")
+        time.sleep(5)
         print("- The temperature drops each day.")
-        print("- Gather firewood outside to keep warm.")
+        time.sleep(5)
+        print("\n\x1b[32m" + r""" Gather firewood outside to keep warm.
+       ___                                                                
+      /___\                                                 
+     (|0 0|)                                                    
+   __/{\U/}\_ ___/vvv                                                
+  / \  {~}   / _|_P|                                                 
+  | /\  ~   /_/   ||                                                 
+  |_| (____)      ||                       
+  \_]/______\  /\_||_/\ 
+     _\_||_/_ |] _||_ [|            
+    (_,_||_,_) \/ [] \/
+        """ + "\x1b[0m")
+        time.sleep(5)
         print("- You have a limited number of attempts to gather wood each day.")
-        print("- Once inside the cabin, burn the wood to increase temperature.")
-        time.sleep(4)
+        time.sleep(5)
+        print("\033[91m" + r""" Once inside the cabin, burn the wood to increase temperature.
+                    |      |        ,---------,
+                    |      |        |r'''|'''Y|
+                   /        \       ||   |   ||
+                  /          \      ||===|===||
+                 /            \     ||   |   ||
+                /              \    |L.__|__.J|
+               /                \   '---------'
+            _________________________
+             -__LLLLLLLLLLLLLLLLL__-
+              \|#/#############\#|/
+              \|##/           \##|/
+              \|#|  )  ) ( ) ) |#|/
+              \|#|  ( ( ()((   |#|/
+              \|#|   /\__\_(-  |#|/
+ _____________\|#| _(\/L/(\/)_ |#|/_____________
+              \|#|-.-.-.-.-.-.-|#|/         
+               '''             ''' 
+        """ + "\033[0m")
+        time.sleep(5)
         print("\nWith those thoughts, you prepare yourself for the challenging days ahead.")
-        time.sleep(3)
+        time.sleep(5)
 
     print(f"\nPlaying as {player.name}.")
     
@@ -279,7 +312,7 @@ _  -      -  -     -    -   -   -   -   -   /   \)  -    -   -  -
                 if not alive:
                     session.commit()
                     print("\nYou fall asleep...")
-                    time.sleep(2)
+                    time.sleep(5)
                     print("...only to never wake.")
                     print("\nGame over!")
                     break
