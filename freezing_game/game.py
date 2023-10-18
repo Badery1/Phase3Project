@@ -118,20 +118,70 @@ def play_game():
         return
 
     if player.days_survived == 0:
-        print("\nThe world as you know it has ended. A violent ice age took the world by storm, and you are left alone stranded at an abandoned campsite.")
-        time.sleep(2)
-        print("\nAs the blizzard clears momentarily, you see it - an old, abandoned cabin. With no other shelter in sight, you decide to take refuge. This, is where you will survive.")
-        time.sleep(3)
-        print("\nThe door creaks as you enter, the gusting wind dying down behind you. The cabin is cold, almost as cold as the outside. You'll need to find firewood to burn if you're to have any hope of surviving this icy nightmare.")
-        time.sleep(3)
+        print("\n\x1b[36m" + r""" The world as you know it has ended. A violent ice age took the world by storm, and you are left alone stranded at an abandoned campsite.
+          -    -  -   -   -       -     -   -  -  -     -   -       -   - 
+ -     -    -   -   -    -   -    --   -  -    -      -  )   - -
+  - -  -    --  -    -       -     -    -  -  /|   )   (     )  -
+-   -      -    -   -   -   -   -   -   -    / -  / (  (   -  - (   - 
+_  -      -  -     -    -   -   -   -   -   /   \)  -    -   -  -
+ \  -      -      -   -  -  -   -   -   -  |   /  -  .--.     - 
+  `-.  -  -   -   -  -   -    -   -  -  -   (  /\    /___ \.-.   
+     \ -    -   -   -   -   -   -    -       \/ \\ - |. .|/`-'  -_
+     |-     -   -   -   -   -   -    - -   -    (_) __\-/__  - .'
+      \    - -  -   -   -   -   -     -  -   - | \\  \:/  )  /
+       \-  -  -  -   -  -   -   -     -   - -  \ V\\  :/ / - |
+        |   -   -   -   -   -   -   -    --   - `-'\\_/ /)  /
+         \    -  -  -   -   -   -     - -  - -   - ((_)/_) /
+         |- -   -   -   -   -   -   -   -   - - -  \ \\  / |
+         | -    -   -   -   -   -   -    -  -    - |  |  | /
+          | -   -   -   -   -    -  -  -  -    -   |__|__| |
+           _______________________________________(___V___)'
+                    """ + "\x1b[0m")
+        time.sleep(4)
+        print("\n\x1b[32m" + r""" As the blizzard clears momentarily, you see it - a cabin. With no other shelter in sight, you decide to take refuge. This, is where you will survive.
+                                                
+                                                         /\
+                                               ___      /%%\
+                                              |_I_|     /%%\
+                   __________________/',______|I_I|____/%%%%\/\
+                  /\'.__.'.__.'.__.'/\/_\'.__.'.__.'.__\%%%%/%%\
+                 /%%\_.'.__.'.__.'./\/_ _\_.'.__.'.__.'.\%%/%%%%\
+                /%%%%\.__.'.__.'._/\/|_|_|\.__.'.__.'.__.\%/%%%%\   
+                /%%%%\_.'.__.'.__.\/_|_|_|_\'.__.'.__.'.__\%%%%%%\                  
+               /%%%%%%\____________________________________\%%%%%%\
+              /%%%%%%%%\]== _ _ _ ============______======]%%%%%%%\
+              /%%%%%%%/\]==|_|_|_|============|////|======]%%%%%%%%\
+           __/%%%%%%%/%%\==|_|_|_|============|////|======]%%%%%%%%\
+            /%%%%%%%/%%%%\====================|&///|======]%%%%%%%%%\
+            /%%%%%%%/%%%%\====================|////|======]^^^^^^^^^^
+           /%%%%%%%/%%%%%%\===================|////|======]  _ - _ -
+           /%%%%%%%/%%%%%%\"""""""""""""""""""'===='"""""""
+           ^^^^^^^/%%%%%%%%\   _ -   _ -              _-
+                  ^^^^^^^^^^
+                    """ + "\x1b[0m")
+        time.sleep(4)
+        print("\n\x1b[33m" + r""" The door creaks as you enter, the gusting wind dying down behind you. The cabin is cold, almost as cold as the outside. You'll need to find firewood to burn if you're to have any hope of surviving this icy nightmare.
+     /|                  ______________________________________    
+    / |                 |                                      | 
+   /__|______           |    ...Hello, anyone home?!?!?!?!?.   |     
+  |  __  __  |          |______________________________________|    
+  | |  ||  | | 
+  | |__||__| |        O  
+  |  __  __()|/      O   
+  | |  ||  | |      o
+  | |  ||  | |
+  | |__||__| |
+  |__________|  
+                    """ + "\x1b[0m")
+        time.sleep(4)
         print("\nHow to survive:")
         print("- The temperature drops each day.")
         print("- Gather firewood outside to keep warm.")
         print("- You have a limited number of attempts to gather wood each day.")
         print("- Once inside the cabin, burn the wood to increase temperature.")
-        time.sleep(3)
+        time.sleep(4)
         print("\nWith those thoughts, you prepare yourself for the challenging days ahead.")
-        time.sleep(2)
+        time.sleep(3)
 
     print(f"\nPlaying as {player.name}.")
     
