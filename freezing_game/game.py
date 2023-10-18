@@ -2,6 +2,17 @@ import time
 from models import Player
 from database import get_session
 import game_mechanics
+import threading
+import pygame  
+
+
+audio_file = 'game-music.mp3'
+
+# Create a function to play audio in a separate thread
+def play_audio():
+    pygame.mixer.init()
+    pygame.mixer.music.load(audio_file)
+    pygame.mixer.music.play(-1)
 
 def get_int_input(prompt):
     while True:
@@ -255,6 +266,9 @@ def play_game():
 
 
 def main():
+    audio_thread = threading.Thread(target=play_audio)
+    audio_thread.daemon = True
+    audio_thread.start()
     while True:
         print("\x1b[34m" + r"""
    *                         *                       
