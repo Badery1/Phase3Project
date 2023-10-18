@@ -12,7 +12,7 @@ def get_int_input(prompt):
 
 def create_player():
     session = get_session()
-    name = input("Enter player name: ")
+    name = input("\x1b[32m" + "Enter new player name: " + "\x1b[0m")
     new_player = Player(name=name)
     session.add(new_player)
     session.commit()
@@ -21,7 +21,7 @@ def create_player():
 
 def delete_player():
     session = get_session()
-    player_id = get_int_input("Enter player ID to delete: ")
+    player_id = get_int_input("\x1b[32m" + "Enter *YOUR* player ID to delete: " + "\x1b[0m")
     player = session.query(Player).filter_by(id=player_id).first()
 
     if not player:
@@ -43,7 +43,7 @@ def display_all_players():
 
 def find_player_by_id():
     session = get_session()
-    player_id = int(input("Enter player ID to find: "))
+    player_id = int(input("\x1b[32m" + "Enter player ID to find: " + "\x1b[0m"))
     player = session.query(Player).filter_by(id=player_id).first()
 
     if not player:
@@ -91,7 +91,7 @@ def toggle_cabin_location(player):
 
 def play_game():
     session = get_session()
-    player_id = int(input("\nEnter player ID to play: "))
+    player_id = int(input("\x1b[32m" + "Enter *YOUR* player ID to play: " + "\x1b[0m"))
     player = session.query(Player).filter_by(id=player_id).first()
 
     if not player:
@@ -144,13 +144,24 @@ def play_game():
               \|#|-.-.-.-.-.-.-|#|/         
                '''             ''' 
     """ + "\033[0m")
-            print("\n--- Inside Cabin Menu ---")
-            print("1. Burn logs")
-            print("2. Burn All logs")
-            print("3. Pass the day")
-            print("4. Check temperature and logs")
-            print("5. Leave cabin")
-            print("6. Exit game")
+            print("\033[91m" + r"""
+  _____           _     _         _____      _     _         __  __                  
+ |_   _|         (_)   | |       / ____|    | |   (_)       |  \/  |                 
+   | |  _ __  ___ _  __| | ___  | |     __ _| |__  _ _ __   | \  / | ___ _ __  _   _ 
+   | | | '_ \/ __| |/ _` |/ _ \ | |    / _` | '_ \| | '_ \  | |\/| |/ _ | '_ \| | | |
+  _| |_| | | \__ | | (_| |  __/ | |___| (_| | |_) | | | | | | |  | |  __| | | | |_| |
+ |_____|_| |_|___|_|\__,_|\___|  \_____\__,_|_.__/|_|_| |_| |_|  |_|\___|_| |_|\__,_|
+        """ + "\033[0m")
+            print("\x1b[31m" + "*************************************" + "\x1b[0m")
+            print("\x1b[31m" + "*                                   *" + "\x1b[0m")
+            print("\x1b[31m" + "* 1. Burn logs                      *" + "\x1b[0m")
+            print("\x1b[31m" + "* 2. Burn All logs                  *" + "\x1b[0m")
+            print("\x1b[31m" + "* 3. Pass the day                   *" + "\x1b[0m")
+            print("\x1b[31m" + "* 4. Check temperature and logs     *" + "\x1b[0m")
+            print("\x1b[31m" + "* 5. Leave cabin                    *" + "\x1b[0m")
+            print("\x1b[31m" + "* 6. Exit game                      *" + "\x1b[0m")
+            print("\x1b[31m" + "*                                   *" + "\x1b[0m")
+            print("\x1b[31m" + "*************************************" + "\x1b[0m")
             
         else:
             print("\033[34m" + """
@@ -172,13 +183,24 @@ def play_game():
     *********** | | *******      *                X      X
 ************************************************************
     """ + "\033[0m")
-            print("\n--- Outside Cabin Menu ---")
-            print("1. Gather firewood")
-            print("2. Check temperature and logs")                                                              
-            print("3. Enter cabin")
-            print("4. Exit game")
+            print("\033[34m" + r"""
+   ____        _       _     _         _____      _     _         __  __                  
+  / __ \      | |     (_)   | |       / ____|    | |   (_)       |  \/  |                 
+ | |  | |_   _| |_ ___ _  __| | ___  | |     __ _| |__  _ _ __   | \  / | ___ _ __  _   _ 
+ | |  | | | | | __/ __| |/ _` |/ _ \ | |    / _` | '_ \| | '_ \  | |\/| |/ _ | '_ \| | | |
+ | |__| | |_| | |_\__ | | (_| |  __/ | |___| (_| | |_) | | | | | | |  | |  __| | | | |_| |
+  \____/ \__,_|\__|___|_|\__,_|\___|  \_____\__,_|_.__/|_|_| |_| |_|  |_|\___|_| |_|\__,_|
+        """ + "\033[0m")
+            print("\x1b[36m" + "*************************************" + "\x1b[0m")
+            print("\x1b[36m" + "*                                   *" + "\x1b[0m")
+            print("\x1b[36m" + "* 1. Gather firewood                *" + "\x1b[0m")
+            print("\x1b[36m" + "* 2. Check temperature and logs     *" + "\x1b[0m")
+            print("\x1b[36m" + "* 3. Enter cabin                    *" + "\x1b[0m")
+            print("\x1b[36m" + "* 4. Exit game                      *" + "\x1b[0m")
+            print("\x1b[36m" + "*                                   *" + "\x1b[0m")
+            print("\x1b[36m" + "*************************************" + "\x1b[0m")
 
-        choice = input("Enter your choice: ")
+        choice = input("\x1b[32m" + "Enter your choice: " + "\x1b[0m")
 
         if player.inside_cabin:
             if choice == '1':
@@ -221,7 +243,7 @@ def play_game():
 
 def main():
     while True:
-        print("\x1b[31m" + r"""
+        print("\x1b[34m" + r"""
    *                         *                       
  (  `                      (  `                      
  )\))(      )  (           )\))(     (           (   
@@ -234,17 +256,17 @@ def main():
 
         """ + "\x1b[0m")
 
-        print("\x1b[34m" + "*******************************" + "\x1b[0m")
-        print("\x1b[34m" + "* 1. Create player            *" + "\x1b[0m")
-        print("\x1b[34m" + "* 2. Delete player            *" + "\x1b[0m")
-        print("\x1b[34m" + "* 3. Display all players      *" + "\x1b[0m")
-        print("\x1b[34m" + "* 4. Find player by ID        *" + "\x1b[0m")
-        print("\x1b[34m" + "* 5. Leaderboard              *" + "\x1b[0m")
-        print("\x1b[34m" + "* 6. Play game                *" + "\x1b[0m")
-        print("\x1b[34m" + "* 7. Exit                     *" + "\x1b[0m")
-        print("\x1b[34m" + "*******************************" + "\x1b[0m")
+        print("\x1b[31m" + "*******************************" + "\x1b[0m")
+        print("\x1b[31m" + "* 1. Create player            *" + "\x1b[0m")
+        print("\x1b[31m" + "* 2. Delete player            *" + "\x1b[0m")
+        print("\x1b[31m" + "* 3. Display all players      *" + "\x1b[0m")
+        print("\x1b[31m" + "* 4. Find player by ID        *" + "\x1b[0m")
+        print("\x1b[31m" + "* 5. Leaderboard              *" + "\x1b[0m")
+        print("\x1b[31m" + "* 6. Play game                *" + "\x1b[0m")
+        print("\x1b[31m" + "* 7. Exit                     *" + "\x1b[0m")
+        print("\x1b[31m" + "*******************************" + "\x1b[0m")
 
-        choice = input("Enter your choice: ")
+        choice = input("\x1b[32m" + "Enter your choice: " + "\x1b[0m")
 
         if choice == '1':
             create_player()
