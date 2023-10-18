@@ -1,7 +1,7 @@
 # Phase3Project
 
 
-Things to impliment!
+Things to implement!
     
     -MAKE SURE ALL EXCEPTIONS ARE HANDLED TO AVOID CRASHES
     
@@ -9,7 +9,7 @@ Features that might be more involved, but cool.
     
     -Add a new option when outside to adventure consuming one of your daily actions to encounter a random event
         -Events such as (losing more temperature, finding an axe upgrade to gather more wood per attempt, an upgrade to have more daily actions, instant exhaustion(no more daily attempts))
-            -Small percentage chance to find a companion that can take its own woodgathering action per day
+            -Small percentage chance to find a companion that can take its own wood gathering action per day
             -Basically a risk/reward system
     -Clearing terminal after each action so that only current selection is shown
     -Possible easy/medium/hard difficulty determining starting temperature as well as rate days get colder
