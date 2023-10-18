@@ -66,6 +66,20 @@ def find_player_by_id():
     
     elif player.alive == False:
         print("\nThis player is dead!")
+        print("\n\x1b[33m" + r""" This player is dead!
+(_;~)                  (~;_)
+(   |                  |   )
+ ~', ',    ,''~'',   ,' ,'~
+     ', ','       ',' ,'
+       ',: {'} {'} :,'
+         ;   /^\   ;
+          ~\  ~  /~
+        ,' ,~~~~~, ',
+      ,' ,' ;~~~; ', ',
+    ,' ,'    '''    ', ',
+  (~  ;               ;  ~)
+  (-;_)               (_;-)
+                    """ + "\x1b[0m")
         session.close()
         return
 
@@ -339,7 +353,7 @@ _  -      -  -     -    -   -   -   -   -   /   \)  -    -   -  -
 
 def main():
     while True:
-        print("\x1b[34m" + r"""
+        print("\033[91m" + r"""
    *                         *                       
  (  `                      (  `                      
  )\))(      )  (           )\))(     (           (   
@@ -350,17 +364,17 @@ def main():
 |_|  |_|\__,_| |_||_||_|  |_|  |_|\___||_||_|  \_,_| 
                                                      
 
-        """ + "\x1b[0m")
+        """ + "\033[0m")
 
-        print("\x1b[31m" + "*******************************" + "\x1b[0m")
-        print("\x1b[31m" + "* 1. Create player            *" + "\x1b[0m")
-        print("\x1b[31m" + "* 2. Delete player            *" + "\x1b[0m")
-        print("\x1b[31m" + "* 3. Display all players      *" + "\x1b[0m")
-        print("\x1b[31m" + "* 4. Find player by ID        *" + "\x1b[0m")
-        print("\x1b[31m" + "* 5. Leaderboard              *" + "\x1b[0m")
-        print("\x1b[31m" + "* 6. Play game                *" + "\x1b[0m")
-        print("\x1b[31m" + "* 7. Exit                     *" + "\x1b[0m")
-        print("\x1b[31m" + "*******************************" + "\x1b[0m")
+        print("\033[34m" + "*******************************" + "\033[0m")
+        print("\033[34m" + "* 1. Create player            *" + "\033[0m")
+        print("\033[34m" + "* 2. Delete player            *" + "\033[0m")
+        print("\033[34m" + "* 3. Display all players      *" + "\033[0m")
+        print("\033[34m" + "* 4. Find player by ID        *" + "\033[0m")
+        print("\033[34m" + "* 5. Leaderboard              *" + "\033[0m")
+        print("\033[34m" + "* 6. Play game                *" + "\033[0m")
+        print("\033[34m" + "* 7. Exit                     *" + "\033[0m")
+        print("\033[34m" + "*******************************" + "\033[0m")
 
         choice = input("\x1b[32m" + "Enter your choice: " + "\x1b[0m")
 
