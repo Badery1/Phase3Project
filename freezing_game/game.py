@@ -13,6 +13,19 @@ def get_int_input(prompt):
 def create_player():
     session = get_session()
     name = input("\x1b[32m" + "Enter new player name: " + "\x1b[0m")
+    if len(name) <= 2:
+            print("\nPlease enter a name with 3 or more letters.")
+            session.close()
+            return
+    elif len(name) > 12:
+        print("\nPlease enter a name with 12 letters or less.")
+        session.close()
+        return
+    existing_player = session.query(Player).filter_by(name=name).first()
+    if existing_player:
+        print(f"\nPlayer named {name} already exists! Please choose a different name.")
+        session.close()
+        return
     new_player = Player(name=name)
     session.add(new_player)
     session.commit()
