@@ -234,15 +234,15 @@ def main():
 
         """ + "\x1b[0m")
 
-        print("\x1b[31m" + "*******************************" + "\x1b[0m")
-        print("\x1b[31m" + "* 1. Create player            *" + "\x1b[0m")
-        print("\x1b[31m" + "* 2. Delete player            *" + "\x1b[0m")
-        print("\x1b[31m" + "* 3. Display all players      *" + "\x1b[0m")
-        print("\x1b[31m" + "* 4. Find player by ID        *" + "\x1b[0m")
-        print("\x1b[31m" + "* 5. Leaderboard              *" + "\x1b[0m")
-        print("\x1b[31m" + "* 6. Play game                *" + "\x1b[0m")
-        print("\x1b[31m" + "* 7. Exit                     *" + "\x1b[0m")
-        print("\x1b[31m" + "*******************************" + "\x1b[0m")
+        print("\x1b[34m" + "*******************************" + "\x1b[0m")
+        print("\x1b[34m" + "* 1. Create player            *" + "\x1b[0m")
+        print("\x1b[34m" + "* 2. Delete player            *" + "\x1b[0m")
+        print("\x1b[34m" + "* 3. Display all players      *" + "\x1b[0m")
+        print("\x1b[34m" + "* 4. Find player by ID        *" + "\x1b[0m")
+        print("\x1b[34m" + "* 5. Leaderboard              *" + "\x1b[0m")
+        print("\x1b[34m" + "* 6. Play game                *" + "\x1b[0m")
+        print("\x1b[34m" + "* 7. Exit                     *" + "\x1b[0m")
+        print("\x1b[34m" + "*******************************" + "\x1b[0m")
 
         choice = input("Enter your choice: ")
 
