@@ -163,8 +163,7 @@ def play_game():
            _______________________________________(___V___)'
                     """ + "\x1b[0m")
         time.sleep(5)
-        print("\n\x1b[32m" + r""" As the blizzard clears momentarily, you see it - a cabin. With no other shelter in sight, you decide to take refuge. This, is where you will survive.
-                                                
+        print("\n\x1b[32m" + r""" As the blizzard clears momentarily, you see it - a cabin. With no other shelter in sight, you decide to take refuge. This, is where you will survive.   
                                                          /\
                                                ___      /%%\
                                               |_I_|     /%%\
@@ -180,7 +179,7 @@ def play_game():
             /%%%%%%%/%%%%\====================|&///|======]%%%%%%%%%\
             /%%%%%%%/%%%%\====================|////|======]^^^^^^^^^^
            /%%%%%%%/%%%%%%\===================|////|======]  _ - _ -
-           /%%%%%%%/%%%%%%\"""""""""""""""""""'===='"""""""
+            /%%%%%%%/%%%%%%\"""""""""""""""""""'===='"""""""
            ^^^^^^^/%%%%%%%%\   _ -   _ -              _-
                   ^^^^^^^^^^
                     """ + "\x1b[0m")
@@ -401,7 +400,8 @@ ______________________
                     print("\nGame over!")
                     break
             elif choice == '4':
-                print(f"\nTemperature: {player.temperature}°F, Logs: {player.logs}")
+                print(f"\n\033[1mTemperature:\033[0m \033[91m{player.temperature}°F\033[0m, \033[1mLogs:\033[0m \033[92m{player.logs}\033[0m")
+                time.sleep(5)
             elif choice == '5':
                 toggle_cabin_location(player)
                 session.commit()
@@ -413,7 +413,8 @@ ______________________
                 game_mechanics.gather_logs(player)
                 session.commit()
             elif choice == '2':
-                print(f"\nTemperature: {player.temperature}°F, Logs: {player.logs}")
+                print(f"\n\033[1mTemperature:\033[0m \033[91m{player.temperature}°F\033[0m, \033[1mLogs:\033[0m \033[92m{player.logs}\033[0m")
+                time.sleep(5)
             elif choice == '3':
                 toggle_cabin_location(player)
                 session.commit()
