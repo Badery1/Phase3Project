@@ -3,7 +3,9 @@ from models import Player
 from database import get_session
 import game_mechanics
 import threading
+import pyfiglet
 import pygame  
+ 
 
 
 audio_file = 'game-music.mp3'

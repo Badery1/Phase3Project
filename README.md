@@ -1,8 +1,8 @@
 # Phase3Project
 
-    Our project titled "Freexing Cabin" is a survival game that simulates the struggle of surviving in a post-apocalyptic winter. The task of each player is to survive inside a cabin for as long as possible. Each day the temperature drops as players gather resources in order to stay alive as many days as possible. The game runs in a command-line interface (CLI) and incorporates game mechanics and a database to save player progress.
+    Our project titled "Freezing Cabin" is a survival game that simulates the struggle of surviving in a post-apocalyptic winter. The task of each player is to survive inside a cabin for as long as possible. Each day the temperature drops as players gather resources in order to stay alive as many days as possible. The game runs in a command-line interface (CLI) and incorporates game mechanics and a database to save player progress.
 
-    To start the game run the game.py script in your CLI.
+    To start the game enter the freezing_game directory and run the game.py script in your CLI.
 
     On "MAIN MENU":
         Choose "1" to create a player and start a new game or select "6" to select an existing player and resume a previous session.
