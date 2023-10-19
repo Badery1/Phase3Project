@@ -62,7 +62,8 @@ def display_all_players():
     session = get_session()
     players = session.query(Player).all()
     for player in players:
-        print(f"ID: {player.id}, Name: {player.name}, Temperature: {player.temperature}°F, Days Survived: {player.days_survived}")
+        print(f"\n\033[1m\033[92mID:\033[0m {player.id}, \033[1m\033[92mName:\033[0m \033[92m{player.name}\033[0m, \033[1m\033[91mTemperature:\033[0m \033[91m{player.temperature}°F\033[0m, \033[1m\033[94mDays Survived:\033[0m \033[94m{player.days_survived}\033[0m")
+        time.sleep(3)
     session.close()
 
 def find_player_by_id():
@@ -176,7 +177,7 @@ _  -      -  -     -    -   -   -   -   -   /   \)  -    -   -  -
                /%%%%%%\____________________________________\%%%%%%\
               /%%%%%%%%\]== _ _ _ ============______======]%%%%%%%\
               /%%%%%%%/\]==|_|_|_|============|////|======]%%%%%%%%\
-           __/%%%%%%%/%%\==|_|_|_|============|////|======]%%%%%%%%\
+             /%%%%%%%/%%\==|_|_|_|============|////|======]%%%%%%%%\
             /%%%%%%%/%%%%\====================|&///|======]%%%%%%%%%\
             /%%%%%%%/%%%%\====================|////|======]^^^^^^^^^^
            /%%%%%%%/%%%%%%\===================|////|======]  _ - _ -
@@ -216,7 +217,18 @@ _  -      -  -     -    -   -   -   -   -   /   \)  -    -   -  -
     (_,_||_,_) \/ [] \/
         """ + "\x1b[0m")
         time.sleep(5)
-        print("- You have a limited number of attempts to gather wood each day.")
+        print("\n\x1b[32m" + r""" You have a limited number of attempts to gather wood each day.
+               ,@@@@@@@,
+       ,,,.   ,@@@@@@/@@,  .oo8888o.
+    ,&T%L%R&%,@@@@@/@@@@@@,8888\88/8o
+   ,E&EY&E%&&%,@@@\@@@/@@@88\88888/88'
+   %&L%&%&/%&&%@@\@@/ /@@@88888\88888'
+   %&&%/ %&%%&&@@\ V /@@' `88\8 `/88'
+   `&%\ ` /%&'    |.|        \ '|8'
+       |o|        | |         | |
+       |.|        | |         | |
+    \\/ ._\//_/__/  ,\_//__\\/.  \_//__/_
+        """ + "\033[0m")              
         time.sleep(5)
         print("\033[91m" + r""" Once inside the cabin, burn the wood to increase temperature.
                     |      |        ,---------,
