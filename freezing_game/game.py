@@ -3,9 +3,8 @@ from models import Player
 from database import get_session
 import game_mechanics
 import threading
-import pyfiglet
-import pygame  
- 
+import pygame
+import pyfiglet  
 
 
 audio_file = 'game-music.mp3'
@@ -78,8 +77,7 @@ def find_player_by_id():
         return
     
     elif player.alive == False:
-        print("\nThis player is dead!")
-        print("\n\x1b[33m" + r""" This player is dead!
+        print("\x1b[37m" + r""" This player is dead!
 (_;~)                  (~;_)
 (   |                  |   )
  ~', ',    ,''~'',   ,' ,'~
@@ -146,33 +144,32 @@ def play_game():
 
     if player.days_survived == 0:
         print("\n\x1b[36m" + r""" The world as you know it has ended. A violent ice age took the world by storm, and you are left alone stranded at an abandoned campsite.
-          -    -  -   -   -       -     -   -  -  -     -   -       -   - 
- -     -    -   -   -    -   -    --   -  -    -      -  )   - -
-  - -  -    --  -    -       -     -    -  -  /|   )   (     )  -
--   -      -    -   -   -   -   -   -   -    / -  / (  (   -  - (   - 
-_  -      -  -     -    -   -   -   -   -   /   \)  -    -   -  -
- \  -      -      -   -  -  -   -   -   -  |   /  -  .--.     - 
-  `-.  -  -   -   -  -   -    -   -  -  -   (  /\    /___ \.-.   
-     \ -    -   -   -   -   -   -    -       \/ \\ - |. .|/`-'  -_
-     |-     -   -   -   -   -   -    - -   -    (_) __\-/__  - .'
-      \    - -  -   -   -   -   -     -  -   - | \\  \:/  )  /
-       \-  -  -  -   -  -   -   -     -   - -  \ V\\  :/ / - |
-        |   -   -   -   -   -   -   -    --   - `-'\\_/ /)  /
-         \    -  -  -   -   -   -     - -  - -   - ((_)/_) /
-         |- -   -   -   -   -   -   -   -   - - -  \ \\  / |
-         | -    -   -   -   -   -   -    -  -    - |  |  | /
-          | -   -   -   -   -    -  -  -  -    -   |__|__| |
+          *    *  *   *   *       *     *   *  *  *     *   *       *   * 
+ *     *    *   *   *    *   *    **   *  *    *___ *   *  (******)   * *
+*   **    *  **    *       *     *    *  *    /    /  * (*******)  *
+*   *      *    *   *   *   *   *   *   *    / \  / *    (******)   * 
+\  *      *  *     *    *   *   *   *   *   /   \/  *    *   *  *
+ \  *      *      *   *  *  *   *   *   *  |    /  *   .**.     * 
+  `*.  *  *   *   *  *   *    *   *  *  *   \  /\    /___ \.*.   
+     \ *    *   *   *   *   *   *    *       \/ \\ * |. .|/`*'  *_
+     |*     *   *   *   *   *   *    * *   *    (_) __\-/__  * .'
+      \    * *  *   *   *   *   *     *  *   *  |\\  \:/  )  /
+       \*  *  *  *   *  *   *   *     *   * *    \V\\  :/ / * |
+        |   *   *   *   *   *   *   *    **   * `*'\\_/ /)  /
+         \    *  *  *   *   *   *     * *  * *   * ((_)/_) /
+         |* *   *   *   *   *   *   *   *   * * *  \ \\  / |
+         | *    *   *   *   *   *   *    *  *    * |  |  | /
+          | *   *   *   *   *    *  *  *  *    *   |__|__| |
            _______________________________________(___V___)'
                     """ + "\x1b[0m")
         time.sleep(5)
-        print("\n\x1b[32m" + r""" As the blizzard clears momentarily, you see it - a cabin. With no other shelter in sight, you decide to take refuge. This, is where you will survive.
-                                                
+        print("\n\x1b[32m" + r""" As the blizzard clears momentarily, you see it - a cabin. With no other shelter in sight, you decide to take refuge. This, is where you will survive.   
                                                          /\
                                                ___      /%%\
                                               |_I_|     /%%\
                    __________________/',______|I_I|____/%%%%\/\
                   /\'.__.'.__.'.__.'/\/_\'.__.'.__.'.__\%%%%/%%\
-                 /%%\_.'.__.'.__.'./\/_ _\_.'.__.'.__.'.\%%/%%%%\
+                 /%%\_.'.__.'.__.'./\/_ _\_.'.__.'.__.'.\MICHAEL\
                 /%%%%\.__.'.__.'._/\/|_|_|\.__.'.__.'.__.\%/%%%%\   
                 /%%%%\_.'.__.'.__.\/_|_|_|_\'.__.'.__.'.__\%%%%%%\                  
                /%%%%%%\____________________________________\%%%%%%\
@@ -182,12 +179,12 @@ _  -      -  -     -    -   -   -   -   -   /   \)  -    -   -  -
             /%%%%%%%/%%%%\====================|&///|======]%%%%%%%%%\
             /%%%%%%%/%%%%\====================|////|======]^^^^^^^^^^
            /%%%%%%%/%%%%%%\===================|////|======]  _ - _ -
-           /%%%%%%%/%%%%%%\"""""""""""""""""""'===='"""""""
+            /%%%%%%%/%%%%%%\"""""""""""""""""""'===='"""""""
            ^^^^^^^/%%%%%%%%\   _ -   _ -              _-
                   ^^^^^^^^^^
                     """ + "\x1b[0m")
         time.sleep(5)
-        print("\n\x1b[33m" + r""" The door creaks as you enter, the gusting wind dying down behind you. The cabin is cold, almost as cold as the outside. You'll need to find firewood to burn if you're to have any hope of surviving this icy nightmare.
+        print("\n\x1b[36m" + r""" The door creaks as you enter, the gusting wind dying down behind you. The cabin is cold, almost as cold as the outside. You'll need to find firewood to burn if you're to have any hope of surviving this icy nightmare.
      /|                  ______________________________________    
     / |                 |                                      | 
    /__|______           |    ...Hello, anyone home?!?!?!?!?.   |     
@@ -201,33 +198,72 @@ _  -      -  -     -    -   -   -   -   -   /   \)  -    -   -  -
   |__________|  
                     """ + "\x1b[0m")
         time.sleep(5)
-        print("\nHow to survive:")
-        time.sleep(5)
-        print("- The temperature drops each day.")
-        time.sleep(5)
-        print("\n\x1b[32m" + r""" Gather firewood outside to keep warm.
-       ___                                                                
-      /___\                                                 
-     (|0 0|)                                                    
-   __/{\U/}\_ ___/vvv                                                
-  / \  {~}   / _|_P|                                                 
-  | /\  ~   /_/   ||                                                 
-  |_| (____)      ||                       
-  \_]/______\  /\_||_/\ 
-     _\_||_/_ |] _||_ [|            
-    (_,_||_,_) \/ [] \/
+        print("\n\x1b[38;5;46m" + r"""
+  _   _                 _                               _             
+ | | | | _____      __ | |_ ___    ___ _   _ _ ____   _(___   _____ _ 
+ | |_| |/ _ \ \ /\ / / | __/ _ \  / __| | | | '__\ \ / | \ \ / / _ (_)
+ |  _  | (_) \ V  V /  | || (_) | \__ | |_| | |   \ V /| |\ V |  __/_ 
+ |_| |_|\___/ \_/\_/    \__\___/  |___/\__,_|_|    \_/ |_| \_/ \___(_)
         """ + "\x1b[0m")
         time.sleep(5)
-        print("- You have a limited number of attempts to gather wood each day.")
+        print("\n\x1b[36m" + r""" The temperature drops each day.
+______________________
+|   ^F     _    ^C   |
+|  100    | |    40  |
+|   90    | |    30  |
+|   80    | |    25  |
+|   70    | |    20  |
+|   60    | |    15  |
+|   50    | |    10  |
+|   40    | |     5  |
+|   30    | |     0  |
+|   20    | |    -5  |
+|   10    | |   -10  |  Now                      
+|    0    |_|   -20  |    That's cold!            
+|  -10    |*|   -25  |
+|  -20    |*|   -30  |
+|  -30    |*|   -35  |
+|        '***`       |
+|       (*****)      |
+|        `---'       |
+|____________________|
+
+                    """ + "\x1b[0m")
+        time.sleep(5)
+        print("\033[93m" + r""" Gather firewood outside to keep warm.
+                  ___                                                                
+                 /___\                                                 
+                (|0 0|)                                                    
+             ___/{\U/}\_____/vvv                                                
+            | / \ {~}    / _|_P|                                                 
+            |  /\  ~   /_/   ||                                                 
+            | _| (____)      ||                       
+             \_]/______\  /\_||_/\ 
+                _\_||_/_ |] _||_ [|            
+               (_,_||_,_) \/ [] \/
+        """ + "\033[0m")
+        time.sleep(5)
+        print("\n\x1b[32m" + r""" You have a limited number of attempts to gather wood each day.
+               ,@@@@@@@,
+       ,,,.   ,@@@@@@/@@,  .oo8888o.
+    ,&%%&%&&%,@@@@@/@@@@@@,8888\88/8o
+   ,%&\%&&%&&%,@@@\@@@/@@@88\88888/88'
+   %&&%&%&/%&&%@@\@@/ /@@@88888\88888'
+   %&&%/ %&%%&&@@\ V /@@' `88\8 `/88'
+   `&%\ ` /%&'    |.|        \ '|8'
+       |o|        | |         | |
+       |.|        | |         | |
+    \\/ ._\//_/__/  ,\_//__\\/.  \_//__/_
+        """ + "\033[0m")              
         time.sleep(5)
         print("\033[91m" + r""" Once inside the cabin, burn the wood to increase temperature.
-                    |      |        ,---------,
-                    |      |        |r'''|'''Y|
-                   /        \       ||   |   ||
-                  /          \      ||===|===||
-                 /            \     ||   |   ||
-                /              \    |L.__|__.J|
-               /                \   '---------'
+                                    ,---------,
+                                    |E'''|'''Y|
+                                    ||   |   ||
+                                    ||===A===||
+                                    ||   |   ||
+                                    |K.__|__.L|
+                                    '---------'
             _________________________
              -__LLLLLLLLLLLLLLLLL__-
               \|#/#############\#|/
@@ -236,15 +272,35 @@ _  -      -  -     -    -   -   -   -   -   /   \)  -    -   -  -
               \|#|  ( ( ()((   |#|/
               \|#|   /\__\_(-  |#|/
  _____________\|#| _(\/L/(\/)_ |#|/_____________
-              \|#|-.-.-.-.-.-.-|#|/         
+              \|#|-.J.O.E.-.-.-|#|/         
                '''             ''' 
         """ + "\033[0m")
         time.sleep(5)
-        print("\nWith those thoughts, you prepare yourself for the challenging days ahead.")
+        print("\x1b[38;5;94m" + r""" With those thoughts, you prepare yourself for the challenging days ahead.
+            _                             _
+           | |                           | |
+         =H| |========mn=======nm========| |H=
+           |_|        ( \     / )        |_|
+                       \ )(")( /
+                       ( /\_/\ )
+                        \     /
+                         )=O=(
+                        /  _  \
+                       /__/ \__\
+                       | |   | |
+                       |_|   |_|
+                       (_)   (_)
+============================================================
+        """ + "\x1b[0m")
         time.sleep(5)
 
-    print(f"\nPlaying as {player.name}.")
-    
+        # print(f"\nPlaying as {player.name}.")
+        name_ascii = pyfiglet.figlet_format(player.name)
+        playing_as_ascii = pyfiglet.figlet_format("Playing as:")
+        print("\x1b[38;5;207m" + f"\n{playing_as_ascii}\n{name_ascii}" + "\x1b[0m")
+        
+        time.sleep(5)
+
     while True:
         if player.inside_cabin:
             print("\033[91m" + """
@@ -344,7 +400,8 @@ _  -      -  -     -    -   -   -   -   -   /   \)  -    -   -  -
                     print("\nGame over!")
                     break
             elif choice == '4':
-                print(f"\nTemperature: {player.temperature}°F, Logs: {player.logs}")
+                print(f"\n\033[1mTemperature:\033[0m \033[91m{player.temperature}°F\033[0m, \033[1mLogs:\033[0m \033[92m{player.logs}\033[0m")
+                time.sleep(5)
             elif choice == '5':
                 toggle_cabin_location(player)
                 session.commit()
@@ -356,7 +413,8 @@ _  -      -  -     -    -   -   -   -   -   /   \)  -    -   -  -
                 game_mechanics.gather_logs(player)
                 session.commit()
             elif choice == '2':
-                print(f"\nTemperature: {player.temperature}°F, Logs: {player.logs}")
+                print(f"\n\033[1mTemperature:\033[0m \033[91m{player.temperature}°F\033[0m, \033[1mLogs:\033[0m \033[92m{player.logs}\033[0m")
+                time.sleep(5)
             elif choice == '3':
                 toggle_cabin_location(player)
                 session.commit()
