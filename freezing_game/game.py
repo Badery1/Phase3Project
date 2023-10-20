@@ -34,8 +34,8 @@ def create_player():
             print("\nPlease enter a name with 3 or more letters.")
             session.close()
             return
-    elif len(name) > 12:
-        print("\nPlease enter a name with 12 letters or less.")
+    elif len(name) > 16:
+        print("\nPlease enter a name with 16 letters or less.")
         session.close()
         return
     existing_player = session.query(Player).filter_by(name=name).first()
@@ -310,8 +310,7 @@ ______________________
         """ + "\x1b[0m")
         time.sleep(5)
 
-        # Print a formatted string with the player's name.
-        print(f"\nPlaying as {player.name}.")
+
 
         # Convert the player's name to ASCII art format using the pyfiglet library.
         name_ascii = pyfiglet.figlet_format(player.name)
