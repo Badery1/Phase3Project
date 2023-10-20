@@ -95,7 +95,8 @@ def find_player_by_id():
         session.close()
         return
 
-    print(f"ID: {player.id}, Name: {player.name}, Temperature: {player.temperature}°F, Days Survived: {player.days_survived}")
+    print(f"\n\033[1m\033[92mID:\033[0m {player.id}, \033[1m\033[92mName:\033[0m \033[92m{player.name}\033[0m, \033[1m\033[91mTemperature:\033[0m \033[91m{player.temperature}°F\033[0m, \033[1m\033[94mDays Survived:\033[0m \033[94m{player.days_survived}\033[0m")
+    time.sleep(3)
     session.close()
 
 def leaderboard():
