@@ -114,6 +114,7 @@ def leaderboard():
     print("\n--- Leaderboard ---")
     for player in players:
         print(f"{player.name} - Days Survived: {player.days_survived}")
+        time.sleep(2)
     session.close()
 
 #The toggle_cabin_location function toggles the player's location between inside and outside the cabin and displays ASCII art accordingly.
