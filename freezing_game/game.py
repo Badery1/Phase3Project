@@ -1,3 +1,4 @@
+#This code imports necessary modules and files!
 import time
 from models import Player
 from database import get_session
@@ -6,15 +7,16 @@ import threading
 import pygame
 import pyfiglet  
 
-
+#The variable audio_file stores the name of the audio file to be played.
 audio_file = 'game-music.mp3'
 
-# Create a function to play audio in a separate thread
+# The play_audio function initializes the mixer, loads the audio file, and plays it in a continuous loop.
 def play_audio():
-    pygame.mixer.init()
-    pygame.mixer.music.load(audio_file)
-    pygame.mixer.music.play(-1)
+    pygame.mixer.init()  # Initialize the pygame mixer
+    pygame.mixer.music.load(audio_file)  # Load the audio file
+    pygame.mixer.music.play(-1)  # Play the audio in a loop
 
+#The get_int_input function repeatedly prompts the user for input until an integer value is provided.
 def get_int_input(prompt):
     while True:
         try:
@@ -22,13 +24,15 @@ def get_int_input(prompt):
         except ValueError:
             print("Please enter a valid number.")
 
+#The create_player function prompts the user to create a new player by inputting a name, and it performs validation checks before creating the player.
 def create_player():
-    session = get_session()
-    name = input("\x1b[32m" + "Enter new player name: " + "\x1b[0m")
+    session = get_session() # Get a database session
+    name = input("\x1b[32m" + "Enter new player name: " + "\x1b[0m")# Prompt for a player's name
+
     if len(name) <= 2:
-            print("\nPlease enter a name with 3 or more letters.")
-            session.close()
-            return
+        print("\nPlease enter a name with 3 or more letters.")
+        session.close()
+        return
     elif len(name) > 12:
         print("\nPlease enter a name with 12 letters or less.")
         session.close()
@@ -38,35 +42,39 @@ def create_player():
         print(f"\nPlayer named {name} already exists! Please choose a different name.")
         session.close()
         return
-    new_player = Player(name=name)
-    session.add(new_player)
-    session.commit()
+    new_player = Player(name=name)  # Create a new player object
+    session.add(new_player)  # Add the new player to the session
+    session.commit()  # Commit the changes to the database
     print(f"\nPlayer {name} created!")
-    session.close()
+    session.close()  # Close the session
 
+#The delete_player function allows the user to delete a player by providing the player's ID.
 def delete_player():
-    session = get_session()
-    player_id = get_int_input("\x1b[32m" + "Enter *YOUR* player ID to delete: " + "\x1b[0m")
-    player = session.query(Player).filter_by(id=player_id).first()
+    session = get_session()  # Get a database session
+    player_id = get_int_input("\x1b[32m" + "Enter *YOUR* player ID to delete: " + "\x1b[0m")  # Prompt for a player's ID
+    player = session.query(Player).filter_by(id=player_id).first()  # Query the database for the player
 
+    # Check if the player does not exist
     if not player:
         print("\nPlayer not found!")
         session.close()
         return
 
-    session.delete(player)
-    session.commit()
+    session.delete(player)  # Delete the player from the database
+    session.commit()  # Commit the changes to the database
     print(f"\nPlayer {player.name} deleted!")
-    session.close()
+    session.close()  # Close the session
 
+#The display_all_players function fetches all players from the database and displays their details.
 def display_all_players():
-    session = get_session()
-    players = session.query(Player).all()
+    session = get_session()  # Get a database session
+    players = session.query(Player).all()  # Query all players from the database
     for player in players:
         print(f"\n\033[1m\033[92mID:\033[0m {player.id}, \033[1m\033[92mName:\033[0m \033[92m{player.name}\033[0m, \033[1m\033[91mTemperature:\033[0m \033[91m{player.temperature}°F\033[0m, \033[1m\033[94mDays Survived:\033[0m \033[94m{player.days_survived}\033[0m")
-        time.sleep(3)
-    session.close()
+        time.sleep(3)  # Sleep for 3 seconds to display each player
+    session.close()  # Close the session
 
+#The find_player_by_id function allows the user to find a player by their ID and displays the player's details if found.
 def find_player_by_id():
     session = get_session()
     player_id = int(input("\x1b[32m" + "Enter player ID to find: " + "\x1b[0m"))
@@ -99,6 +107,7 @@ def find_player_by_id():
     time.sleep(3)
     session.close()
 
+#The leaderboard function fetches all players from the database and displays them in descending order based on the number of days survived.
 def leaderboard():
     session = get_session()
     players = session.query(Player).order_by(Player.days_survived.desc()).all()
@@ -107,6 +116,7 @@ def leaderboard():
         print(f"{player.name} - Days Survived: {player.days_survived}")
     session.close()
 
+#The toggle_cabin_location function toggles the player's location between inside and outside the cabin and displays ASCII art accordingly.
 def toggle_cabin_location(player):
     player.inside_cabin = not player.inside_cabin
     if player.inside_cabin:
@@ -129,6 +139,7 @@ def toggle_cabin_location(player):
 
     time.sleep(5)
 
+# The play_game function allows the user to play the game, interacting with game mechanics based on the player's choices.
 def play_game():
     session = get_session()
     player_id = int(input("\x1b[32m" + "Enter *YOUR* player ID to play: " + "\x1b[0m"))
@@ -296,11 +307,19 @@ ______________________
         """ + "\x1b[0m")
         time.sleep(5)
 
-        # print(f"\nPlaying as {player.name}.")
+        # Print a formatted string with the player's name.
+        print(f"\nPlaying as {player.name}.")
+
+        # Convert the player's name to ASCII art format using the pyfiglet library.
         name_ascii = pyfiglet.figlet_format(player.name)
+
+        # Create ASCII art for the phrase "Playing as:" using the pyfiglet library.
         playing_as_ascii = pyfiglet.figlet_format("Playing as:")
+
+        # Print the ASCII art for the phrase "Playing as:" and the player's name in a specific color.
         print("\x1b[38;5;207m" + f"\n{playing_as_ascii}\n{name_ascii}" + "\x1b[0m")
-        
+
+        # Pause the execution for 5 seconds to allow the player to view the ASCII art.
         time.sleep(5)
 
     while True:
@@ -423,7 +442,7 @@ ______________________
             elif choice == '4':
                 break
 
-
+#The main function is the main entry point of the program. It starts the audio in a separate thread and presents a menu for various actions.
 def main():
     audio_thread = threading.Thread(target=play_audio)
     audio_thread.daemon = True
@@ -441,6 +460,10 @@ def main():
                                                      
 
         """ + "\033[0m")
+# This Ascii art code creates an infinite loop that continuously prints a stylized ASCII art message in the terminal. 
+# The ANSI escape sequence "\033[91m" changes the subsequent text color to red, while the enclosed multiple line raw string represents the ASCII art. 
+# The "\033[0m" sequence resets the text color to the default after printing the ASCII art, ensuring that subsequent text remains unaffected by the color change. 
+# This kind of code is commonly used to add visual appeal to CLI games and apps.     
 
         print("\033[34m" + "*******************************" + "\033[0m")
         print("\033[34m" + "* 1. Create player            *" + "\033[0m")
@@ -454,27 +477,42 @@ def main():
 
         choice = input("\x1b[32m" + "Enter your choice: " + "\x1b[0m")
 
+        # Checks if the user's choice is '1'.
         if choice == '1':
+            # Calls the 'create_player' function if the condition is met.
             create_player()
 
+        # Checks if the user's choice is '2'.
         elif choice == '2':
+            # Calls the 'delete_player' function if the condition is met.
             delete_player()
 
+        # Checks if the user's choice is '3'.
         elif choice == '3':
+            # Calls the 'display_all_players' function if the condition is met.
             display_all_players()
 
+        # Checks if the user's choice is '4'.
         elif choice == '4':
+            # Calls the 'find_player_by_id' function if the condition is met.
             find_player_by_id()
 
+        # Checks if the user's choice is '5'.
         elif choice == '5':
+            # Calls the 'leaderboard' function if the condition is met.
             leaderboard()
 
+        # Checks if the user's choice is '6'.
         elif choice == '6':
+            # Calls the 'play_game' function if the condition is met.
             play_game()
 
+        # Checks if the user's choice is '7'.
         elif choice == '7':
+            # Prints a farewell message and breaks out of the loop if the condition is met.
             print("\nTill next time!")
             break
 
+# Calls the 'main' function if the script is run as the main program.
 if __name__ == "__main__":
     main()
