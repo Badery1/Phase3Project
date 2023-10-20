@@ -70,7 +70,7 @@ def display_all_players():
     players = session.query(Player).all()  # Query all players from the database
     for player in players:
         print(f"\n\033[1m\033[92mID:\033[0m {player.id}, \033[1m\033[92mName:\033[0m \033[92m{player.name}\033[0m, \033[1m\033[91mTemperature:\033[0m \033[91m{player.temperature}°F\033[0m, \033[1m\033[94mDays Survived:\033[0m \033[94m{player.days_survived}\033[0m")
-        time.sleep(2)  # Sleep for 3 seconds to display each player
+        time.sleep(2)  # Sleep for 2 seconds to display each player
     session.close()  # Close the session
 
 #The find_player_by_id function allows the user to find a player by their ID and displays the player's details if found.
@@ -381,6 +381,7 @@ _  -      -  -     -    -   -   -   -   -   /   \)  -    -   -  -
                     break
             elif choice == '4':
                 print(f"\nTemperature: {player.temperature}°F, Logs: {player.logs}")
+                time.sleep(1)
             elif choice == '5':
                 toggle_cabin_location(player)
                 session.commit()
@@ -393,6 +394,7 @@ _  -      -  -     -    -   -   -   -   -   /   \)  -    -   -  -
                 session.commit()
             elif choice == '2':
                 print(f"\nTemperature: {player.temperature}°F, Logs: {player.logs}")
+                time.sleep(1)
             elif choice == '3':
                 toggle_cabin_location(player)
                 session.commit()
