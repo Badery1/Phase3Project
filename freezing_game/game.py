@@ -10,12 +10,21 @@ import pyfiglet
 
 #The variable audio_file stores the name of the audio file to be played.
 audio_file = 'game-music.mp3'
+audio_file2 = 'end.mp3'
 
-# The play_audio function initializes the mixer, loads the audio file, and plays it in a continuous loop.
+# The play_audio function initializes the mixer, loads the audio file, and plays it.
 def play_audio():
     pygame.mixer.init()
     pygame.mixer.music.load(audio_file)
     pygame.mixer.music.play(-1)
+
+def play_end_audio():
+    pygame.mixer.init()
+    pygame.mixer.music.load(audio_file2)
+    pygame.mixer.music.play()
+
+def is_end_audio_playing():
+    return pygame.mixer.music.get_busy()
 
 #The get_int_input function repeatedly prompts the user for input until an integer value is provided.
 def get_int_input(prompt):
@@ -433,6 +442,10 @@ __   __            _   _                   ____  _          _ _
        \_/\_/ \__,_|___/\__\___|\__,_|      
 
         """ + "\x1b[0m")
+                    play_end_audio()
+                    while is_end_audio_playing():
+                        pygame.time.Clock().tick(8)
+                    play_audio()
                     break
             elif choice == '4':
                 print(f"\n\033[1mTemperature:\033[0m \033[91m{player.temperature}°F\033[0m, \033[1mLogs:\033[0m \033[92m{player.logs}\033[0m")
