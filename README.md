@@ -1,5 +1,12 @@
 # Phase3Project
 
+    
+    ---<<<Before you start you may need to install some dependancies>>>
+            -pip install pygame
+            -pip install pyfiglet
+            -pip install SQAlchemy
+
+    
     Our project titled "Freezing Cabin" is a survival game that simulates the struggle of surviving in a post-apocalyptic winter. The task of each player is to survive inside a cabin for as long as possible. Each day the temperature drops as players gather resources in order to stay alive as many days as possible. The game runs in a command-line interface (CLI) and incorporates game mechanics and a database to save player progress.
 
     To start the game enter the freezing_game directory and run the game.py script in your CLI.
@@ -23,6 +30,7 @@
 
         Select "2" to check the current temperature and resource inventory.
         Make sure to manage your resources and keep the fire burning to avoid hypothermia.
+        If the player drops to -30°F you die and are no longer able to select that player!
 
         Select "3" to enter the cabin.
         Staying in the cabin keeps you warm and safe, but you'll need logs to maintain the fire. 
