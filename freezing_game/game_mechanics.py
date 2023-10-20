@@ -17,13 +17,13 @@ def gather_logs(player):
     # Check if the player has any gathering attempts left.
     if player.gathering_attempts <= 0:
         print("You've exhausted all attempts to gather logs today.")
-        time.sleep(3)
+        time.sleep(2)
         session.close()
         return
 
     # Simulate the process of gathering logs.
     print("\nGathering firewood...")
-    time.sleep(3)
+    time.sleep(2)
 
     # Randomly determine the number of logs gathered and update the player's log count accordingly.
     logs_gathered = random.choice(LOG_GATHERING_OUTCOMES)
@@ -36,19 +36,19 @@ def gather_logs(player):
     # Provide feedback to the player based on the result of the gathering attempt.
     if logs_gathered:
         print(f"You gathered {logs_gathered} logs!")
-        time.sleep(3)
+        time.sleep(2)
     else:
         print("You couldn't find any logs.")
-        time.sleep(3)
+        time.sleep(2)
 
     # Update the remaining gathering attempts for the player and provide appropriate messages.
     player.gathering_attempts -= 1
     if player.gathering_attempts <= 0:
         print("You are too tired to gather more logs.")
-        time.sleep(3)
+        time.sleep(2)
     else:
         print(f"You have {player.gathering_attempts} gathering attempts left.")
-        time.sleep(3)
+        time.sleep(2)
 
     # Close the session after completing the operations.
     session.close()
@@ -60,22 +60,22 @@ def burn_logs(player):
 
     # Display the current number of logs the player has and initiate the burning process.
     print(f"\nYou currently have {player.logs} logs.")
-    time.sleep(3)
+    time.sleep(2)
     while True:
         logs_to_burn_input = input("How many logs would you like to burn? ")
-        time.sleep(3)
+        time.sleep(2)
         try:
             logs_to_burn = int(logs_to_burn_input)
 
             # Check if the player has enough logs to burn and if the input is valid.
             if logs_to_burn > player.logs:
                 print("\nYou don't have that many logs!")
-                time.sleep(3)
+                time.sleep(2)
                 continue
 
             if logs_to_burn < 0:
                 print("\nYou cannot burn a negative number of logs!")
-                time.sleep(3)
+                time.sleep(2)
                 continue
 
             # Update the player's log count and temperature based on the logs burned.
@@ -85,7 +85,7 @@ def burn_logs(player):
 
             # Simulate the process of burning logs and display the updated temperature.
             print("\nBurning logs...")
-            time.sleep(3)
+            time.sleep(2)
             print(f"\nYou burned {logs_to_burn} logs. Your temperature is now {player.temperature}°F.")
             time.sleep(5)
             break
@@ -116,15 +116,15 @@ def burn_all_logs(player):
 
         # Simulate the process of burning all logs and display the updated temperature.
         print("\nBurning all of your logs...")
-        time.sleep(3)
+        time.sleep(2)
         print(f"\nYou burned ALL your logs! Your temperature is now {player.temperature}°F.")
         time.sleep(5)
     elif confirmation.lower() == 'n':
         print("\nFine then. DON'T burn all your logs.")
-        time.sleep(3)
+        time.sleep(2)
     else:
         print("\nInvalid Choice.")
-        time.sleep(3)
+        time.sleep(2)
 
     # Close the session after completing the operations.
     session.close()
@@ -156,7 +156,7 @@ def pass_day(player):
         player.alive = False
         session.commit()
         print("\nIt's getting dangerously cold!")
-        time.sleep(3)
+        time.sleep(2)
         session.close()
         return False
 
