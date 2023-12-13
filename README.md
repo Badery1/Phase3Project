@@ -1,13 +1,9 @@
 # Phase3Project
 
-    
-    ---<<<Before you start you may need to install some dependancies>>>
-            -pip install pygame
-            -pip install pyfiglet
-            -pip install SQAlchemy
-
-    
-    Our project titled "Freezing Cabin" is a survival game that simulates the struggle of surviving in a post-apocalyptic winter. The task of each player is to survive inside a cabin for as long as possible. Each day the temperature drops as players gather resources in order to stay alive as many days as possible. The game runs in a command-line interface (CLI) and incorporates game mechanics and a database to save player progress.
+    Our project titled "Freezing Cabin" is a survival game that simulates the struggle of surviving in a post-apocalyptic winter.
+    The task of each player is to survive inside a cabin for as long as possible.
+    Each day the temperature drops as players gather resources in order to stay alive as many days as possible.
+    The game runs in a command-line interface (CLI) and incorporates game mechanics and a database to save player progress.
 
     To start the game enter the freezing_game directory and run the game.py script in your CLI.
 
@@ -47,3 +43,12 @@
 
         Select "5" to enter the cabin or leave it.
         Leaving the cabin allows you to collect more resources to stay alive.
+
+
+    
+        <<<Before you start you may need to install some dependancies>>>
+            -pip install pygame
+            -pip install pyfiglet
+            -pip install SQAlchemy
+
+    
